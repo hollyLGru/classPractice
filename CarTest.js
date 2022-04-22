@@ -29,7 +29,7 @@ let Car = require("./Car.js")
             c.addFuel(5);
             assert.equal(c.fuel, 5, "expecting fuel to be 5");
 
-            caddFuel(2);
+            c.addFuel(2);
             assert.equal(c.fuel, 7, "expecting fuel to be 7");
 
         })
@@ -52,3 +52,56 @@ let Car = require("./Car.js")
         })
     })
     
+    describe("driving", function() {
+
+        it("test", function(){
+            let c = new Car(1, 10, 30);
+            assert.equal(c.odometer, 0, "car has not moved yet" );
+
+            c.drive(30);
+
+            assert.equal(c.odometer, 0, "Because we cannot go without fuel");
+
+            c.addFuel(10);
+            c.drive(30);
+
+            assert.equal(c.odometer, 30);
+            assert.equal(c.fuel, 9);
+        })
+
+        it("test2", function(){
+            let c = new Car(1, 10, 30);
+            c.addFuel(1);
+            c.drive(100);
+            assert.equal(c.odometer, 30);
+            assert.equal(c.fuel, 0);
+        })
+        
+        it("test3", function(){
+            let c = new Car(1, 10, 30);
+            c.addFuel(1);
+            c.drive(-30);
+            assert.equal(c.odometer, 0);
+        })})
+
+        describe("driving distance", function(){
+            
+            
+            it("test1", function(){
+                let c = new Car(1, 10, 30);
+                assert.equal(c.getDrivingDistance(), 0);
+            })
+
+            it("test2", function(){
+                let c = new Car(1, 10, 30);
+                c.addFuel(2)
+                assert.equal(c.getDrivingDistance(), 60);
+            })
+
+            it("test3", function(){
+                let c = new Car(1, 10, 15);
+                c.addFuel(2)
+                assert.equal(c.getDrivingDistance(), 30);
+            })
+        })
+ 
